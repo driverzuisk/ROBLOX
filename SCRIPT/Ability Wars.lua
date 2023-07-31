@@ -15,6 +15,12 @@ local MISC_TAB = Window:MakeTab({
 	PremiumOnly = false
 })
 
+local ABILITY_TAB = Window:MakeTab({
+	Name = "ABILITY",
+	Icon = "rbxassetid://484211948",
+	PremiumOnly = false
+})
+
 -- UI Configs
 getgenv().aurareach = math.huge
 
@@ -144,6 +150,35 @@ MISC_TAB:AddToggle({
 	end
 })
 
+MISC_TAB:AddToggle({
+	Name = "OBJECT | [GENERATEUR]",
+	Default = false,
+	Callback = function(bool)
+		getgenv().object = bool
+
+		while getgenv().object do
+			task.wait(10)
+			pcall(function()
+				game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").PAPFunction:InvokeServer()
+			end)
+		end
+	end    
+})
+
+ABILITY_TAB:AddToggle({
+	Name = "ABILITY | [DEVOURS OF SOULS]",
+	Default = false,
+	Callback = function(bool)
+        pcall(function()
+         local args = {
+             [1] = "Devourer of Souls"
+         }
+         
+         game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").AbilitySelect:FireServer(unpack(args))
+	end)
+end
+})
+
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	if msg == "dev mode" then
 		local DEV_MODE = Window:MakeTab({
@@ -156,7 +191,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			Name = "Developer Mode",
 			Content = "Developer Mode has been unlocked",
 			Image = "rbxassetid://1202200114",
-			Time = 5
+			Time = 10
 		})
 
 		DEV_MODE:AddButton({
