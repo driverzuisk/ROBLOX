@@ -16,12 +16,12 @@ local MISC_TAB = Window:MakeTab({
 })
 
 -- UI Configs
-getgenv().aurareach = 10
+getgenv().aurareach = math.huge
 
 local ANTI_VOID = Instance.new("Part")
 ANTI_VOID.Parent = workspace
 ANTI_VOID.Anchored = true
-ANTI_VOID.Transparency = 0.5
+ANTI_VOID.Transparency = 0
 ANTI_VOID.Position = Vector3.new(65, 15, -10)
 ANTI_VOID.Size = Vector3.new(2800,1,2800)
 ANTI_VOID.CanCollide = true
@@ -34,7 +34,7 @@ MAIN_TAB:AddToggle({
 		getgenv().saura = bool
 
       while getgenv().saura do
-         task.wait(0)
+         task.wait(5)
       for i,v in pairs(game:GetService("Players"):GetChildren()) do
          if v.Character["Right Arm"]:FindFirstChild("SelectionBox") == nil and v ~= game.Players.LocalPlayer then
          local target = v.Character.HumanoidRootPart
@@ -43,8 +43,8 @@ MAIN_TAB:AddToggle({
          local args = {
          [1] = workspace:WaitForChild(target.Parent.Name),
          [2] = Vector3.new(target.Position),
-         [3] = 5,
-         [4] = game:GetService("Players"):WaitForChild(target.Parent.Name).Character:FindFirstChild("Head")
+         [3] = 0,
+         [4] = game:GetService("Players"):WaitForChild(target.Parent.Name).Character:FindFirstChild("Torso")
          }
 
          game:GetService("ReplicatedStorage"):WaitForChild("Remote Events"):WaitForChild("Punch"):FireServer(unpack(args))
@@ -58,7 +58,7 @@ MAIN_TAB:AddToggle({
 MAIN_TAB:AddSlider({
 	Name = "PUNCH AURA | [REACH]",
 	Min = 0,
-	Max = 10,
+	Max = math.huge,
 	Default = 0,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
@@ -92,7 +92,7 @@ MAIN_TAB:AddSlider({
 MAIN_TAB:AddSlider({
 	Name = "SAUT | [FORCE]",
 	Min = 20,
-	Max = 100,
+	Max = 50,
 	Default = 20,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
@@ -173,7 +173,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 				getgenv().aura = bool
 		
 			  while getgenv().aura do
-				 task.wait(0)
+				 task.wait(5)
 			  for i,v in pairs(game:GetService("Players"):GetChildren()) do
 				 if v.Character["Right Arm"]:FindFirstChild("SelectionBox") == nil and v ~= game.Players.LocalPlayer then
 				 local target = v.Character.HumanoidRootPart
@@ -182,8 +182,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 				 local args = {
 				 [1] = workspace:WaitForChild(target.Parent.Name),
 				 [2] = Vector3.new(target.Position),
-				 [3] = 5,
-				 [4] = game:GetService("Players"):WaitForChild(target.Parent.Name).Character:FindFirstChild("Head")
+				 [3] = 0,
+				 [4] = game:GetService("Players"):WaitForChild(target.Parent.Name).Character:FindFirstChild("Torso")
 				 }
 		
 				 game:GetService("ReplicatedStorage"):WaitForChild("Remote Events"):WaitForChild("Punch"):FireServer(unpack(args))
