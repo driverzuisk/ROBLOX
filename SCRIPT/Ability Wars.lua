@@ -40,7 +40,7 @@ MAIN_TAB:AddToggle({
 		getgenv().saura = bool
 
       while getgenv().saura do
-         task.wait(2)
+         task.wait(1.25)
       for i,v in pairs(game:GetService("Players"):GetChildren()) do
          if v.Character["Right Arm"]:FindFirstChild("SelectionBox") == nil and v ~= game.Players.LocalPlayer then
          local target = v.Character.HumanoidRootPart
@@ -208,7 +208,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 				getgenv().aura = bool
 		
 			  while getgenv().aura do
-				 task.wait(2)
+				 task.wait(1.25)
 			  for i,v in pairs(game:GetService("Players"):GetChildren()) do
 				 if v.Character["Right Arm"]:FindFirstChild("SelectionBox") == nil and v ~= game.Players.LocalPlayer then
 				 local target = v.Character.HumanoidRootPart
